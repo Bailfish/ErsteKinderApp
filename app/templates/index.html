@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero-banner">
+    <h1>Willkommen in deiner KinderSpielWelt! 🌟</h1>
+    <p>Wähle dein Lieblingsspiel aus. In jedem Spiel findest du oben rechts das <strong>Zahnrad ⚙️</strong> für Steuerung und Einstellungen!</p>
+</section>
+
+<section class="games-grid" aria-label="Minispiele Auswahl">
+    {% for game in games %}
+    <article class="game-card" style="--card-accent: {{ game.accent_color }}">
+        <div class="game-card-icon">{{ game.icon }}</div>
+        <div class="game-card-body">
+            <span class="game-subtitle">{{ game.subtitle }}</span>
+            <h2>{{ game.title }}</h2>
+            <p>{{ game.description }}</p>
+            <div class="badge-list">
+                {% for badge in game.badges %}
+                <span class="badge">{{ badge }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="game-card-footer">
+            <a href="{{ game.url }}" class="btn btn-play">▶ Jetzt spielen!</a>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

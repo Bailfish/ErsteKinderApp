@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="game-shell">
+    <div class="game-top-bar">
+        <div>
+            <h1>🧪🌈 Farbsortierspiel</h1>
+            <p class="game-instructions">Tippe ein Reagenzglas an und danach das Zielglas, um gleiche Farben zusammenzugießen!</p>
+        </div>
+        <div class="game-controls-bar">
+            <label>Schwierigkeit:
+                <select id="cs-difficulty">
+                    <option value="easy">🌱 Leicht (3 Farben)</option>
+                    <option value="medium">⭐ Mittel (5 Farben)</option>
+                    <option value="hard">🔥 Schwer (7 Farben)</option>
+                </select>
+            </label>
+            <button id="cs-undo-btn" class="btn btn-secondary" disabled>↩️ Rückgängig</button>
+            <button id="cs-new-btn" class="btn btn-primary">🔄 Neues Level</button>
+        </div>
+    </div>
+
+    <div id="cs-status" class="status-banner">Wähle ein Reagenzglas zum Ausgießen! (Züge: <span id="cs-moves">0</span>)</div>
+
+    <div id="cs-tubes-container" class="tubes-stage" aria-label="Reagenzgläser"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/color_sort.js"></script>
+{% endblock %}

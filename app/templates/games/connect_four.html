@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="game-shell">
+    <div class="game-top-bar">
+        <div>
+            <h1>🔴🟡 4 Gewinnt</h1>
+            <p class="game-instructions">Bringe 4 Steine deiner Farbe waagerecht, senkrecht oder diagonal in eine Reihe!</p>
+        </div>
+        <div class="game-controls-bar">
+            <label>Modus:
+                <select id="c4-mode">
+                    <option value="ai">🤖 Gegen Computer</option>
+                    <option value="pvp">👫 2 Spieler (Mensch vs. Mensch)</option>
+                </select>
+            </label>
+            <label id="c4-diff-label">Computer-Stärke:
+                <select id="c4-difficulty">
+                    <option value="easy">🌱 Leicht</option>
+                    <option value="medium">⭐ Mittel</option>
+                    <option value="hard">🔥 Schwer</option>
+                </select>
+            </label>
+            <button id="c4-new-btn" class="btn btn-primary">🔄 Neues Spiel</button>
+        </div>
+    </div>
+
+    <div id="c4-status" class="status-banner">Spieler 1 (Rot 🔴) ist am Zug!</div>
+
+    <div class="c4-board-wrapper">
+        <div id="c4-column-buttons" class="c4-col-buttons" aria-label="Spalten Auswahl"></div>
+        <div id="c4-board" class="c4-board" role="grid" aria-label="4 Gewinnt Spielbrett"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/connect_four.js"></script>
+{% endblock %}

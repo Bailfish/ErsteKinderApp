@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="game-shell">
+    <div class="game-top-bar">
+        <div>
+            <h1>🏃‍♂️⭐ Hüpf &amp; Flitz – Jump &amp; Run</h1>
+            <p class="game-instructions">Weiche den Hindernissen aus! Springe über Boden-Hindernisse und ducke dich unter Flug-Hindernissen!</p>
+        </div>
+        <div class="game-controls-bar">
+            <label>Tempo:
+                <select id="jr-difficulty">
+                    <option value="easy">🌱 Leicht</option>
+                    <option value="medium">⭐ Mittel</option>
+                    <option value="hard">🔥 Schwer</option>
+                </select>
+            </label>
+            <button id="jr-start-btn" class="btn btn-primary">▶ Lauf starten / Neustart</button>
+        </div>
+    </div>
+
+    <div class="jr-scoreboard">
+        <span>🏆 Punkte: <strong id="jr-score">0</strong></span>
+        <span>🚧 Ausgewichen: <strong id="jr-dodged">0</strong></span>
+        <span>👑 Rekord: <strong id="jr-highscore">0</strong></span>
+        <span id="jr-control-hint">Steuerung: Leertaste / ⬆️ = Springen | ⬇️ = Ducken</span>
+    </div>
+
+    <div class="jr-canvas-wrapper">
+        <canvas id="jr-canvas" width="800" height="360" aria-label="Jump and Run Spielfeld"></canvas>
+    </div>
+
+    <div id="jr-touch-controls" class="jr-touch-bar">
+        <button id="jr-jump-btn" class="btn btn-jump" type="button">⬆️ SPRINGEN</button>
+        <button id="jr-duck-btn" class="btn btn-duck" type="button">⬇️ DUCKEN</button>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/jump_and_run.js"></script>
+{% endblock %}

@@ -1,0 +1,1 @@
+"""ErsteKinderApp package."""

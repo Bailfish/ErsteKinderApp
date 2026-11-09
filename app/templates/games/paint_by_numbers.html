@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="game-shell">
+    <div class="game-top-bar">
+        <div>
+            <h1>🎨🖌️ Malen nach Zahlen</h1>
+            <p class="game-instructions">Wähle unten eine Farb-Nummer und tippe dann auf die passende Zahl im Bild!</p>
+        </div>
+        <div class="game-controls-bar">
+            <label>Beispielbild:
+                <select id="pbn-template-select">
+                    {% for preset in presets %}
+                    <option value="{{ preset.id }}">{{ preset.icon }} {{ preset.title }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <button id="pbn-load-preset-btn" class="btn btn-primary">🖼️ Vorlage laden</button>
+            <button id="pbn-hint-btn" class="btn btn-secondary">💡 Tipp zeigen</button>
+        </div>
+    </div>
+
+    <!-- Eigene Bilder hochladen mit einstellbarer Farb-Granularität -->
+    <div class="upload-panel">
+        <form id="pbn-upload-form" class="upload-form">
+            <strong>📷 Eigenes Bild ausmalen:</strong>
+            <input type="file" id="pbn-file-input" name="file" accept="image/*" required>
+            <label for="pbn-granularity">
+                Farb-Granularität: <strong id="pbn-granularity-val">6</strong> Farben
+            </label>
+            <input type="range" id="pbn-granularity" name="num_colors" min="3" max="16" value="6">
+            <label for="pbn-detail">Detailgrad:
+                <select id="pbn-detail">
+                    <option value="14x10">Große Felder (Kinderleicht)</option>
+                    <option value="20x15" selected>Mittel (Empfohlen)</option>
+                    <option value="28x21">Fein (Viele Felder)</option>
+                </select>
+            </label>
+            <button type="submit" class="btn btn-secondary">✨ Bild umwandeln</button>
+        </form>
+    </div>
+
+    <div id="pbn-status" class="status-banner">
+        Fortschritt: <strong id="pbn-progress">0%</strong> – Wähle eine Farbe und tippe auf ein Zahlenfeld!
+    </div>
+
+    <div class="pbn-workspace">
+        <div id="pbn-palette" class="pbn-palette" aria-label="Farbpalette"></div>
+        <div class="pbn-canvas-box">
+            <svg id="pbn-svg" viewBox="0 0 600 450" class="pbn-svg" aria-label="Ausmalbild"></svg>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/paint_by_numbers.js"></script>
+{% endblock %}

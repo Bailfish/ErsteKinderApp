@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} | SpielWelt</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body data-game-id="{{ game_id or '' }}">
+    <header class="app-header">
+        <div class="header-left">
+            <a href="/" class="brand-logo" title="Zurück zur Startseite">
+                <span class="logo-icon">🎪</span>
+                <span class="logo-text">KinderSpielWelt</span>
+            </a>
+            {% if game_id %}
+            <a href="/" class="back-home-btn">⬅️ Alle Spiele</a>
+            {% endif %}
+        </div>
+        <div class="header-right">
+            {% if game_id %}
+            <button id="settings-gear-btn" class="gear-btn" aria-label="Einstellungen öffnen" title="Einstellungen (Steuerung & Optionen)">
+                ⚙️ <span>Einstellungen</span>
+            </button>
+            {% endif %}
+        </div>
+    </header>
+
+    <main class="app-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if game_id %}
+    <!-- Zahnrad-Einstellungsmenü Modal -->
+    <div id="settings-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 id="settings-modal-title">⚙️ Spieleinstellungen</h2>
+                <button id="settings-close-btn" class="close-btn" aria-label="Schließen">✖</button>
+            </div>
+            <form id="settings-form" class="settings-form">
+                <div class="form-group">
+                    <label for="setting-control-scheme">🎮 Steuerung:</label>
+                    <select id="setting-control-scheme" name="control_scheme">
+                        <option value="hybrid">Maus / Touch &amp; Tastatur (Beides)</option>
+                        <option value="mouse_touch">Nur Maus / Antippen (Touch)</option>
+                        <option value="keyboard">Nur Tastatur</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="setting-primary-key">⌨️ Haupt-Aktionstaste (Springen / Einwerfen):</label>
+                    <select id="setting-primary-key" name="primary_key">
+                        <option value="Space">Leertaste (Space)</option>
+                        <option value="ArrowUp">Pfeil nach oben (⬆️)</option>
+                        <option value="KeyW">Taste W</option>
+                        <option value="Enter">Eingabetaste (Enter)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="setting-secondary-key">⌨️ Zweit-Taste (Ducken / Rückgängig):</label>
+                    <select id="setting-secondary-key" name="secondary_key">
+                        <option value="ArrowDown">Pfeil nach unten (⬇️)</option>
+                        <option value="KeyS">Taste S</option>
+                        <option value="KeyZ">Taste Z</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="setting-difficulty">⭐ Standard-Schwierigkeit:</label>
+                    <select id="setting-difficulty" name="difficulty">
+                        <option value="easy">Leicht (Anfänger)</option>
+                        <option value="medium">Mittel (Fortgeschritten)</option>
+                        <option value="hard">Schwer (Profi)</option>
+                    </select>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="setting-sound" name="sound_enabled" checked>
+                        🔊 Soundeffekte aktivieren
+                    </label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="setting-hints" name="show_hints" checked>
+                        💡 Kinderfreundliche Tipps &amp; Hilfen anzeigen
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="settings-reset-btn" class="btn btn-secondary">Zurücksetzen</button>
+                    <button type="submit" class="btn btn-primary">💾 Speichern &amp; Anwenden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        window.INITIAL_GAME_SETTINGS = {{ settings | tojson }};
+    </script>
+    <script src="/static/js/settings_modal.js"></script>
+    {% endif %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
